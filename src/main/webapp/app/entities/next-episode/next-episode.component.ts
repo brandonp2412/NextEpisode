@@ -7,6 +7,7 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { INextEpisode } from 'app/shared/model/next-episode.model';
 import { Principal } from 'app/core';
 import { NextEpisodeService } from './next-episode.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'jhi-next-episode',
@@ -30,6 +31,10 @@ export class NextEpisodeComponent implements OnInit, OnDestroy {
             this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
                 ? this.activatedRoute.snapshot.params['search']
                 : '';
+    }
+
+    public daysLeft(episodeDate) {
+        return moment(episodeDate).diff(moment(), 'days');
     }
 
     loadAll() {

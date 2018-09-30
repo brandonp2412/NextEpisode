@@ -31,6 +31,7 @@ export class NextEpisodeUpdatePage {
     episodeNumberInput = element(by.id('field_episodeNumber'));
     episodeSeasonInput = element(by.id('field_episodeSeason'));
     episodeDateInput = element(by.id('field_episodeDate'));
+    daysLeftInput = element(by.id('field_daysLeft'));
 
     async getPageTitle() {
         return this.pageTitle.getText();
@@ -74,6 +75,14 @@ export class NextEpisodeUpdatePage {
 
     async getEpisodeDateInput() {
         return this.episodeDateInput.getAttribute('value');
+    }
+
+    async setDaysLeftInput(daysLeft) {
+        await this.daysLeftInput.sendKeys(daysLeft);
+    }
+
+    async getDaysLeftInput() {
+        return this.daysLeftInput.getAttribute('value');
     }
 
     async save() {

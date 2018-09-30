@@ -5,6 +5,7 @@ import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { LoginModalService, Principal, Account } from 'app/core';
 import { NextEpisodeService } from 'app/entities/next-episode';
 import { NextEpisode } from 'app/shared/model/next-episode.model';
+import * as moment from 'moment';
 
 @Component({
     selector: 'jhi-home',
@@ -26,6 +27,10 @@ export class HomeComponent implements OnInit {
             this.loadNextEpisodes();
         });
         this.registerAuthenticationSuccess();
+    }
+
+    public daysLeft(episodeDate) {
+        return moment(episodeDate).diff(moment(), 'days');
     }
 
     registerAuthenticationSuccess() {

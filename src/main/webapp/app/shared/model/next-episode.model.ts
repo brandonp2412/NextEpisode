@@ -8,6 +8,8 @@ export interface INextEpisode {
     episodeNumber?: number;
     episodeSeason?: number;
     episodeDate?: Moment;
+    daysLeft?: number;
+    alreadyOut?: boolean;
 }
 
 export class NextEpisode implements INextEpisode {
@@ -18,6 +20,8 @@ export class NextEpisode implements INextEpisode {
         public image?: any,
         public episodeNumber?: number,
         public episodeSeason?: number,
-        public episodeDate?: Moment
+        public episodeDate?: Moment,
+        public daysLeft?: number,
+        public alreadyOut?: boolean
     ) {}
 }

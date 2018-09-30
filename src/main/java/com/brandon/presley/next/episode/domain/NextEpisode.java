@@ -46,6 +46,12 @@ public class NextEpisode implements Serializable {
     @Column(name = "episode_date")
     private LocalDate episodeDate;
 
+    @Column(name = "days_left")
+    private Integer daysLeft;
+
+    @Column(name = "already_out")
+    private boolean alreadyOut;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -132,6 +138,23 @@ public class NextEpisode implements Serializable {
     public void setEpisodeDate(LocalDate episodeDate) {
         this.episodeDate = episodeDate;
     }
+
+    public boolean getAlreadyOut() {
+        return alreadyOut;
+    }
+
+    public Integer getDaysLeft() {
+        return daysLeft;
+    }
+
+    public NextEpisode daysLeft(Integer daysLeft) {
+        this.daysLeft = daysLeft;
+        return this;
+    }
+
+    public void setDaysLeft(Integer daysLeft) {
+        this.daysLeft = daysLeft;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -164,6 +187,7 @@ public class NextEpisode implements Serializable {
             ", episodeNumber=" + getEpisodeNumber() +
             ", episodeSeason=" + getEpisodeSeason() +
             ", episodeDate='" + getEpisodeDate() + "'" +
+            ", daysLeft=" + getDaysLeft() +
             "}";
     }
 }
