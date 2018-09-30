@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 
 import { LoginModalService, Principal, Account } from 'app/core';
+import { NextEpisodeService } from 'app/entities/next-episode';
+import { NextEpisode } from 'app/shared/model/next-episode.model';
 
 @Component({
     selector: 'jhi-home',
@@ -12,12 +14,16 @@ import { LoginModalService, Principal, Account } from 'app/core';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    nextEpisodes: NextEpisode[];
 
-    constructor(private principal: Principal, private loginModalService: LoginModalService, private eventManager: JhiEventManager) {}
+    constructor(private principal: Principal, private loginModalService: LoginModalService,
+        private eventManager: JhiEventManager, private nextEpisodeService: NextEpisodeService,
+        private dataUtils: JhiDataUtils) {}
 
     ngOnInit() {
         this.principal.identity().then(account => {
             this.account = account;
+            this.loadNextEpisodes();
         });
         this.registerAuthenticationSuccess();
     }
@@ -28,6 +34,14 @@ export class HomeComponent implements OnInit {
                 this.account = account;
             });
         });
+    }
+
+    private loadNextEpisodes() {
+        this.nextEpisodeService.query().subscribe(res => this.nextEpisodes = res.body);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
     }
 
     isAuthenticated() {
