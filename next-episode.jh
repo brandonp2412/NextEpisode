@@ -1,14 +1,7 @@
 entity Show {
 	name String required
     image ImageBlob
-}
-
-entity Episode {
-    number Integer required
-    season Integer
-    releaseDate LocalDate required
-}
-
-relationship OneToOne {
-    Show{lastEpisode} to Episode
+    episodeNumber Integer
+    episodeSeason Integer
+    episodeDate LocalDate
 }
