@@ -1,0 +1,20 @@
+version: '2'
+services:
+    nextepisode-app:
+        image: nextepisode
+        environment:
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://nextepisode-mysql:3306/nextepisode?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_JEST_URI=http://nextepisode-elasticsearch:9200
+        ports:
+            - 8080:8080
+    nextepisode-mysql:
+        extends:
+            file: mysql.yml
+            service: nextepisode-mysql
+    nextepisode-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: nextepisode-elasticsearch
