@@ -5,3 +5,11 @@ entity Program {
     episodeSeason Integer
     episodeDate LocalDate
 }
+
+entity NextEpisode {
+	name String required
+    image ImageBlob
+    episodeNumber Integer
+    episodeSeason Integer
+    episodeDate LocalDate
+}
