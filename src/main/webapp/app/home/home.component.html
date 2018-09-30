@@ -4,38 +4,34 @@
         <div class="alert alert-success" *ngIf="isAuthenticated()">
             <span id="home-logged-message" *ngIf="account"> You are logged in as user "{{account.login}}". </span>
         </div>
-    </div>
-    <div class="alert alert-warning" *ngIf="!isAuthenticated()">
-        <span>If you want to </span>
-        <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br />-
-            Administrator (login="admin" and password="admin") <br />- User (login="user" and password="user").</span>
+        <div class="alert alert-warning" *ngIf="!isAuthenticated()">
+            <span>If you want to </span>
+            <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br />-
+                Administrator (login="admin" and password="admin") <br />- User (login="user" and password="user").</span>
+        </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="d-flex align-items-stretch">
-            <div class="card" style="width: 18rem;display:inline-block" *ngFor="let episode of nextEpisodes">
-                <a *ngIf="episode.image" (click)="openFile(episode.imageContentType, episode.image)">
-                    <img [src]="'data:' + episode.imageContentType + ';base64,' + episode.image" alt="episode image"
-                        class="card-img-top" />
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">{{episode.name}}</h5>
-                    <p class="card-text" *ngIf="episode.episodeSeason">
-                        Season: {{episode.episodeSeason}},
-                        Episode: {{episode.episodeNumber}}
-                    </p>
-                    <p class="card-text" *ngIf="!episode.episodeSeason">
-                        Episode: {{episode.episodeNumber}}
-                    </p>
-                    <p class="card-text">
-                        Release Date: {{episode.episodeDate | date}}<br>
-                        Days left: {{daysLeft(episode.episodeDate)}}
-                    </p>
-                    <a href="#" class="btn btn-primary">Mark as Seen</a>
-                </div>
-            </div>
-        </div>
+<div class="card" style="width: 18rem;display:inline-block" *ngFor="let episode of nextEpisodes">
+    <a *ngIf="episode.image" (click)="openFile(episode.imageContentType, episode.image)">
+        <img [src]="'data:' + episode.imageContentType + ';base64,' + episode.image" alt="episode image" class="card-img-top" />
+    </a>
+    <div class="card-body">
+        <h5 class="card-title">{{episode.name}}</h5>
+        <p class="card-text" *ngIf="episode.episodeSeason">
+            Season: {{episode.episodeSeason}},
+            Episode: {{episode.episodeNumber}}
+        </p>
+        <p class="card-text" *ngIf="!episode.episodeSeason">
+            Episode: {{episode.episodeNumber}}
+        </p>
+        <p class="card-text">
+            Release Date: {{episode.episodeDate | date}}<br>
+        </p>
+        <p class="card-text">
+            Days left: {{daysLeft(episode.episodeDate)}}
+        </p>
+        <a href="#" (click)="nextEpisode(episode)" class="btn btn-primary">Next Episode</a>
+        <a href="#" (click)="nextSeason(episode)" class="btn btn-secondary">Next Season</a>
     </div>
 </div>

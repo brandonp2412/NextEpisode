@@ -6,6 +6,8 @@ import { LoginModalService, Principal, Account } from 'app/core';
 import { NextEpisodeService } from 'app/entities/next-episode';
 import { NextEpisode } from 'app/shared/model/next-episode.model';
 import * as moment from 'moment';
+import { Program } from 'app/shared/model/program.model';
+import { ProgramService } from 'app/entities/program';
 
 @Component({
     selector: 'jhi-home',
@@ -19,7 +21,7 @@ export class HomeComponent implements OnInit {
 
     constructor(private principal: Principal, private loginModalService: LoginModalService,
         private eventManager: JhiEventManager, private nextEpisodeService: NextEpisodeService,
-        private dataUtils: JhiDataUtils) {}
+        private dataUtils: JhiDataUtils, private programService: ProgramService) { }
 
     ngOnInit() {
         this.principal.identity().then(account => {
@@ -33,10 +35,30 @@ export class HomeComponent implements OnInit {
         return moment(episodeDate).diff(moment(), 'days');
     }
 
+    public nextEpisode(episode: NextEpisode) {
+        episode.episodeDate.add(1, 'week');
+        this.programService.update(this.convertEpisodeProgram(episode))
+            .subscribe(() => this.loadNextEpisodes());
+    }
+
+    public nextSeason(episode: NextEpisode) {
+        episode.episodeDate.add(1, 'week');
+        episode.episodeNumber = 0;
+        episode.episodeSeason += 1;
+        this.programService.update(this.convertEpisodeProgram(episode))
+            .subscribe(() => this.loadNextEpisodes());
+    }
+
+    private convertEpisodeProgram(episode: NextEpisode): Program {
+        return new Program(episode.id, episode.name, episode.imageContentType, episode.image,
+            episode.episodeNumber, episode.episodeSeason, episode.episodeDate);
+    }
+
     registerAuthenticationSuccess() {
         this.eventManager.subscribe('authenticationSuccess', message => {
             this.principal.identity().then(account => {
                 this.account = account;
+                this.loadNextEpisodes();
             });
         });
     }
