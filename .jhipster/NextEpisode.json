@@ -1,0 +1,39 @@
+{
+    "name": "NextEpisode",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "episodeNumber",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "episodeSeason",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "episodeDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20180930063348",
+    "entityTableName": "next_episode",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

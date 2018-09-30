@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span>Next Episodes</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-next-episode" [routerLink]="['/next-episode/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down" >
+            Create new Next Episode
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="nextEpisodes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Image</span></th>
+            <th><span>Episode Number</span></th>
+            <th><span>Episode Season</span></th>
+            <th><span>Episode Date</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let nextEpisode of nextEpisodes ;trackBy: trackId">
+                <td><a [routerLink]="['/next-episode', nextEpisode.id, 'view' ]">{{nextEpisode.id}}</a></td>
+                <td>{{nextEpisode.name}}</td>
+                <td>
+                    <a *ngIf="nextEpisode.image" (click)="openFile(nextEpisode.imageContentType, nextEpisode.image)">
+                        <img [src]="'data:' + nextEpisode.imageContentType + ';base64,' + nextEpisode.image" style="max-height: 30px;" alt="nextEpisode image"/>
+                    </a>
+                    <span *ngIf="nextEpisode.image">{{nextEpisode.imageContentType}}, {{byteSize(nextEpisode.image)}}</span>
+                </td>
+                <td>{{nextEpisode.episodeNumber}}</td>
+                <td>{{nextEpisode.episodeSeason}}</td>
+                <td>{{nextEpisode.episodeDate | date:'mediumDate'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/next-episode', nextEpisode.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/next-episode', nextEpisode.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'next-episode/'+ nextEpisode.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
