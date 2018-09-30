@@ -46,7 +46,6 @@
                     <a *ngIf="program.image" (click)="openFile(program.imageContentType, program.image)">
                         <img [src]="'data:' + program.imageContentType + ';base64,' + program.image" style="max-height: 30px;" alt="program image"/>
                     </a>
-                    <span *ngIf="program.image">{{program.imageContentType}}, {{byteSize(program.image)}}</span>
                 </td>
                 <td>{{program.episodeNumber}}</td>
                 <td>{{program.episodeSeason}}</td>
