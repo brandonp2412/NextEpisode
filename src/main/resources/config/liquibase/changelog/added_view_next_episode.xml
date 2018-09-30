@@ -19,7 +19,8 @@
                 episode_number + 1 as episode_number, 
                 episode_season, 
                 episode_date + 7 as episode_date,
-                NOW() - episode_date as days_left
+                NOW() - episode_date as days_left,
+                NOW() > episode_date as already_out
             FROM program
             ORDER BY episode_date;
         </createView>
