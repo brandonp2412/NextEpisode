@@ -1,4 +1,4 @@
-entity Program {
+entity Show {
 	name String required
     image ImageBlob
 }
@@ -10,5 +10,5 @@ entity Episode {
 }
 
 relationship OneToOne {
-    Program{lastEpisode} to Episode
+    Show{lastEpisode} to Episode
 }
