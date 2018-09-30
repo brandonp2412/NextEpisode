@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span>Programs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-program" [routerLink]="['/program/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down" >
+            Create new Program
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="programs">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Image</span></th>
+            <th><span>Episode Number</span></th>
+            <th><span>Episode Season</span></th>
+            <th><span>Episode Date</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let program of programs ;trackBy: trackId">
+                <td><a [routerLink]="['/program', program.id, 'view' ]">{{program.id}}</a></td>
+                <td>{{program.name}}</td>
+                <td>
+                    <a *ngIf="program.image" (click)="openFile(program.imageContentType, program.image)">
+                        <img [src]="'data:' + program.imageContentType + ';base64,' + program.image" style="max-height: 30px;" alt="program image"/>
+                    </a>
+                    <span *ngIf="program.image">{{program.imageContentType}}, {{byteSize(program.image)}}</span>
+                </td>
+                <td>{{program.episodeNumber}}</td>
+                <td>{{program.episodeSeason}}</td>
+                <td>{{program.episodeDate | date:'mediumDate'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/program', program.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/program', program.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'program/'+ program.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

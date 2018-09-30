@@ -38,6 +38,7 @@ public class CacheConfiguration {
             cm.createCache(com.brandon.presley.next.episode.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.brandon.presley.next.episode.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.brandon.presley.next.episode.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.brandon.presley.next.episode.domain.Program.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
