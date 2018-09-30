@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="program">
+            <h2><span>Program</span> {{program.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{program.name}}</span>
+                </dd>
+                <dt><span>Image</span></dt>
+                <dd>
+                    <div *ngIf="program.image">
+                        <a (click)="openFile(program.imageContentType, program.image)">
+                            <img [src]="'data:' + program.imageContentType + ';base64,' + program.image" style="max-width: 100%;" alt="program image"/>
+                        </a>
+                        {{program.imageContentType}}, {{byteSize(program.image)}}
+                    </div>
+                </dd>
+                <dt><span>Last Episode</span></dt>
+                <dd>
+                    <div *ngIf="program.lastEpisode">
+                        <a [routerLink]="['/episode', program.lastEpisode?.id, 'view']">{{program.lastEpisode?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/program', program.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
