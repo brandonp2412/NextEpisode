@@ -19,7 +19,8 @@
                 episode_number + 1 as episode_number, 
                 episode_season, 
                 episode_date + 7 as episode_date
-            FROM program;
+            FROM program
+            ORDER BY episode_date;
         </createView>
     </changeSet>
 </databaseChangeLog>
