@@ -36,13 +36,11 @@ export class HomeComponent implements OnInit {
     }
 
     public nextEpisode(episode: NextEpisode) {
-        episode.episodeDate.add(1, 'week');
         this.programService.update(this.convertEpisodeProgram(episode))
             .subscribe(() => this.loadNextEpisodes());
     }
 
     public nextSeason(episode: NextEpisode) {
-        episode.episodeDate.add(1, 'week');
         episode.episodeNumber = 0;
         episode.episodeSeason += 1;
         this.programService.update(this.convertEpisodeProgram(episode))
@@ -51,7 +49,7 @@ export class HomeComponent implements OnInit {
 
     private convertEpisodeProgram(episode: NextEpisode): Program {
         return new Program(episode.id, episode.name, episode.imageContentType, episode.image,
-            episode.episodeNumber, episode.episodeSeason, episode.episodeDate);
+            episode.episodeNumber, episode.episodeSeason, episode.episodeDate, episode.user);
     }
 
     registerAuthenticationSuccess() {

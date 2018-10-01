@@ -57,7 +57,7 @@ spring:
     liquibase:
         contexts: prod
     mail:
-        host: localhost
+        host: aspmx.l.google.com
         port: 25
         username:
         password:
