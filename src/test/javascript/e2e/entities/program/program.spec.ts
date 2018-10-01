@@ -50,6 +50,7 @@ describe('Program e2e test', () => {
         expect(await programUpdatePage.getEpisodeSeasonInput()).to.eq('5');
         await programUpdatePage.setEpisodeDateInput('2000-12-31');
         expect(await programUpdatePage.getEpisodeDateInput()).to.eq('2000-12-31');
+        await programUpdatePage.userSelectLastOption();
         await programUpdatePage.save();
         expect(await programUpdatePage.getSaveButton().isPresent()).to.be.false;
 

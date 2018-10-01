@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IUser } from 'app/core/user/user.model';
 
 export interface IProgram {
     id?: number;
@@ -8,6 +9,7 @@ export interface IProgram {
     episodeNumber?: number;
     episodeSeason?: number;
     episodeDate?: Moment;
+    user?: IUser;
 }
 
 export class Program implements IProgram {
@@ -18,6 +20,7 @@ export class Program implements IProgram {
         public image?: any,
         public episodeNumber?: number,
         public episodeSeason?: number,
-        public episodeDate?: Moment
+        public episodeDate?: Moment,
+        public user?: IUser
     ) {}
 }

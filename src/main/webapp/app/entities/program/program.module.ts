@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { NextEpisodeSharedModule } from 'app/shared';
+import { NextEpisodeAdminModule } from 'app/admin/admin.module';
 import {
     ProgramComponent,
     ProgramDetailComponent,
@@ -15,7 +16,7 @@ import {
 const ENTITY_STATES = [...programRoute, ...programPopupRoute];
 
 @NgModule({
-    imports: [NextEpisodeSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [NextEpisodeSharedModule, NextEpisodeAdminModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         ProgramComponent,
         ProgramDetailComponent,

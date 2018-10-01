@@ -31,6 +31,7 @@ export class ProgramUpdatePage {
     episodeNumberInput = element(by.id('field_episodeNumber'));
     episodeSeasonInput = element(by.id('field_episodeSeason'));
     episodeDateInput = element(by.id('field_episodeDate'));
+    userSelect = element(by.id('field_user'));
 
     async getPageTitle() {
         return this.pageTitle.getText();
@@ -74,6 +75,25 @@ export class ProgramUpdatePage {
 
     async getEpisodeDateInput() {
         return this.episodeDateInput.getAttribute('value');
+    }
+
+    async userSelectLastOption() {
+        await this.userSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async userSelectOption(option) {
+        await this.userSelect.sendKeys(option);
+    }
+
+    getUserSelect(): ElementFinder {
+        return this.userSelect;
+    }
+
+    async getUserSelectedOption() {
+        return this.userSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

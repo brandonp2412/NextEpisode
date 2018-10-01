@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.brandon.presley.next.episode.domain.Program;
 import com.brandon.presley.next.episode.repository.ProgramRepository;
 import com.brandon.presley.next.episode.repository.search.ProgramSearchRepository;
+import com.brandon.presley.next.episode.security.AuthoritiesConstants;
+import com.brandon.presley.next.episode.security.SecurityUtils;
 import com.brandon.presley.next.episode.web.rest.errors.BadRequestAlertException;
 import com.brandon.presley.next.episode.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -57,6 +59,7 @@ public class ProgramResource {
         if (program.getId() != null) {
             throw new BadRequestAlertException("A new program cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         Program result = programRepository.save(program);
         programSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/programs/" + result.getId()))
@@ -96,7 +99,11 @@ public class ProgramResource {
     @Timed
     public List<Program> getAllPrograms() {
         log.debug("REST request to get all Programs");
-        return programRepository.findAll();
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN))
+            return programRepository.findAll();
+        else {
+            return programRepository.findByUserIsCurrentUser();
+        }
     }
 
     /**

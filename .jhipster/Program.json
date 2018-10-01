@@ -1,5 +1,16 @@
 {
-    "name": "Program",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "program"
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",
@@ -26,14 +37,11 @@
             "fieldType": "LocalDate"
         }
     ],
-    "relationships": [],
     "changelogDate": "20180930061343",
-    "entityTableName": "program",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": "elasticsearch",
     "service": "no",
+    "entityTableName": "program",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

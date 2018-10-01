@@ -1,5 +1,6 @@
 package com.brandon.presley.next.episode.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -45,6 +46,10 @@ public class Program implements Serializable {
 
     @Column(name = "episode_date")
     private LocalDate episodeDate;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -131,6 +136,19 @@ public class Program implements Serializable {
 
     public void setEpisodeDate(LocalDate episodeDate) {
         this.episodeDate = episodeDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Program user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
