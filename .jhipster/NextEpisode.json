@@ -1,5 +1,16 @@
 {
-    "name": "NextEpisode",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "nextEpisode"
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",
@@ -24,20 +35,13 @@
         {
             "fieldName": "episodeDate",
             "fieldType": "LocalDate"
-        },
-        {
-            "fieldName": "daysLeft",
-            "fieldType": "Integer"
         }
     ],
-    "relationships": [],
     "changelogDate": "20180930063348",
-    "entityTableName": "next_episode",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": "elasticsearch",
     "service": "no",
+    "entityTableName": "next_episode",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

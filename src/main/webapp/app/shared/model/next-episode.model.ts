@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IUser } from 'app/core/user/user.model';
 
 export interface INextEpisode {
     id?: number;
@@ -8,6 +9,7 @@ export interface INextEpisode {
     episodeNumber?: number;
     episodeSeason?: number;
     episodeDate?: Moment;
+    user?: IUser;
 }
 
 export class NextEpisode implements INextEpisode {
@@ -19,5 +21,6 @@ export class NextEpisode implements INextEpisode {
         public episodeNumber?: number,
         public episodeSeason?: number,
         public episodeDate?: Moment,
+        public user?: IUser
     ) {}
 }

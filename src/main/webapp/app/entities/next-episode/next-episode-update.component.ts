@@ -2,10 +2,11 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { JhiDataUtils } from 'ng-jhipster';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { INextEpisode } from 'app/shared/model/next-episode.model';
 import { NextEpisodeService } from './next-episode.service';
+import { IUser, UserService } from 'app/core';
 
 @Component({
     selector: 'jhi-next-episode-update',
@@ -14,11 +15,15 @@ import { NextEpisodeService } from './next-episode.service';
 export class NextEpisodeUpdateComponent implements OnInit {
     private _nextEpisode: INextEpisode;
     isSaving: boolean;
+
+    users: IUser[];
     episodeDateDp: any;
 
     constructor(
         private dataUtils: JhiDataUtils,
+        private jhiAlertService: JhiAlertService,
         private nextEpisodeService: NextEpisodeService,
+        private userService: UserService,
         private elementRef: ElementRef,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -28,6 +33,12 @@ export class NextEpisodeUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ nextEpisode }) => {
             this.nextEpisode = nextEpisode;
         });
+        this.userService.query().subscribe(
+            (res: HttpResponse<IUser[]>) => {
+                this.users = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     byteSize(field) {
@@ -70,6 +81,14 @@ export class NextEpisodeUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackUserById(index: number, item: IUser) {
+        return item.id;
     }
     get nextEpisode() {
         return this._nextEpisode;

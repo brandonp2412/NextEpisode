@@ -18,7 +18,8 @@
             SELECT id, name, image, image_content_type, 
                 episode_number + 1 as episode_number, 
                 episode_season, 
-                DATE_ADD(episode_date, INTERVAL 1 WEEK) as episode_date
+                DATE_ADD(episode_date, INTERVAL 1 WEEK) as episode_date,
+                user_id
             FROM program
             ORDER BY episode_date;
         </createView>

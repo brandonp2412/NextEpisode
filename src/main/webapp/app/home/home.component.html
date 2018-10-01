@@ -4,6 +4,9 @@
         <div class="alert alert-success" *ngIf="isAuthenticated()">
             <span id="home-logged-message" *ngIf="account"> You are logged in as user "{{account.login}}". </span>
         </div>
+        <h2 *ngIf="nextEpisodes && !nextEpisodes.length">
+            Looks like nothing's here. Try adding some Programs first.
+        </h2>
         <div class="alert alert-warning" *ngIf="!isAuthenticated()">
             <span>If you want to </span>
             <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br />-
@@ -25,10 +28,10 @@
         <p class="card-text" *ngIf="!episode.episodeSeason">
             Episode: {{episode.episodeNumber}}
         </p>
-        <p class="card-text">
+        <p class="card-text" *ngIf="episode.episodeDate">
             Release Date: {{episode.episodeDate | date}}<br>
         </p>
-        <p class="card-text">
+        <p class="card-text" *ngIf="episode.episodeDate">
             Days left: {{daysLeft(episode.episodeDate)}}
         </p>
         <a href="#" (click)="nextEpisode(episode)" class="btn btn-primary">Next Episode</a>

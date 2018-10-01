@@ -30,9 +30,9 @@
                 <dd>
                     <span>{{nextEpisode.episodeDate}}</span>
                 </dd>
-                <dt><span>Days Left</span></dt>
+                <dt><span>User</span></dt>
                 <dd>
-                    <span>{{daysLeft(nextEpisode.episodeDate)}}</span>
+                    {{nextEpisode.user?.login}}
                 </dd>
             </dl>
 

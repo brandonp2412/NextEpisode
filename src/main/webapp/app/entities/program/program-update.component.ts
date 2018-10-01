@@ -6,7 +6,7 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IProgram } from 'app/shared/model/program.model';
 import { ProgramService } from './program.service';
-import { IUser, UserService } from 'app/core';
+import { IUser, UserService, Principal, User } from 'app/core';
 
 @Component({
     selector: 'jhi-program-update',
@@ -24,6 +24,7 @@ export class ProgramUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private programService: ProgramService,
         private userService: UserService,
+        private principalService: Principal,
         private elementRef: ElementRef,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -62,6 +63,11 @@ export class ProgramUpdateComponent implements OnInit {
     }
 
     save() {
+        this.principalService.identity().then(user => this.createOrUpdate(user));
+    }
+
+    private createOrUpdate(user: User) {
+        this.program.user = user;
         this.isSaving = true;
         if (this.program.id !== undefined) {
             this.subscribeToSaveResponse(this.programService.update(this.program));

@@ -35,7 +35,7 @@
             <th><span>Episode Number</span></th>
             <th><span>Episode Season</span></th>
             <th><span>Episode Date</span></th>
-            <th><span>Days Left</span></th>
+            <th><span>User</span></th>
             <th></th>
             </tr>
             </thead>
@@ -52,7 +52,9 @@
                 <td>{{nextEpisode.episodeNumber}}</td>
                 <td>{{nextEpisode.episodeSeason}}</td>
                 <td>{{nextEpisode.episodeDate | date:'mediumDate'}}</td>
-                <td>{{daysLeft(nextEpisode.episodeDate)}}</td>
+                <td>
+                    {{nextEpisode.user?.login}}
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

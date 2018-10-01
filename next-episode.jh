@@ -12,5 +12,4 @@ entity NextEpisode {
     episodeNumber Integer
     episodeSeason Integer
     episodeDate LocalDate
-    daysLeft Integer
 }

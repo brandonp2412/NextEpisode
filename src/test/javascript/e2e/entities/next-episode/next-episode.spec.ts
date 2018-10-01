@@ -50,8 +50,7 @@ describe('NextEpisode e2e test', () => {
         expect(await nextEpisodeUpdatePage.getEpisodeSeasonInput()).to.eq('5');
         await nextEpisodeUpdatePage.setEpisodeDateInput('2000-12-31');
         expect(await nextEpisodeUpdatePage.getEpisodeDateInput()).to.eq('2000-12-31');
-        await nextEpisodeUpdatePage.setDaysLeftInput('5');
-        expect(await nextEpisodeUpdatePage.getDaysLeftInput()).to.eq('5');
+        await nextEpisodeUpdatePage.userSelectLastOption();
         await nextEpisodeUpdatePage.save();
         expect(await nextEpisodeUpdatePage.getSaveButton().isPresent()).to.be.false;
 

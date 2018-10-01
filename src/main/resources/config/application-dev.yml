@@ -24,6 +24,7 @@ spring:
         active: dev
         include:
             - swagger
+            - no-liquibase
             # Uncomment to activate TLS for the dev profile
             #- tls
     devtools:
@@ -35,24 +36,26 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:file:./target/h2db/db/nextepisode;DB_CLOSE_DELAY=-1
-        username: NextEpisode
-        password:
+        url: jdbc:mysql://192.168.1.225:3306/NextEpisode?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: root
+        password: root
         hikari:
             auto-commit: false
-    h2:
-        console:
-            enabled: false
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
     jpa:
-        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-        database: H2
-        show-sql: true
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: MYSQL
+        show-sql: false
         properties:
             hibernate.id.new_generator_mappings: true
             hibernate.connection.provider_disables_autocommit: true
             hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: true
+            hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
     data:
         elasticsearch:

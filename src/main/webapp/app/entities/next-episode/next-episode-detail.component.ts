@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { INextEpisode } from 'app/shared/model/next-episode.model';
-import * as moment from 'moment';
 
 @Component({
     selector: 'jhi-next-episode-detail',
@@ -18,10 +17,6 @@ export class NextEpisodeDetailComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ nextEpisode }) => {
             this.nextEpisode = nextEpisode;
         });
-    }
-
-    public daysLeft(episodeDate) {
-        return moment(episodeDate).diff(moment(), 'days');
     }
 
     byteSize(field) {

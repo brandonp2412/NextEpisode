@@ -63,8 +63,6 @@ public class NextEpisodeResourceIntTest {
     private static final LocalDate DEFAULT_EPISODE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_EPISODE_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Integer DEFAULT_DAYS_LEFT = 1;
-    private static final Integer UPDATED_DAYS_LEFT = 2;
 
     @Autowired
     private NextEpisodeRepository nextEpisodeRepository;
@@ -117,8 +115,7 @@ public class NextEpisodeResourceIntTest {
             .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
             .episodeNumber(DEFAULT_EPISODE_NUMBER)
             .episodeSeason(DEFAULT_EPISODE_SEASON)
-            .episodeDate(DEFAULT_EPISODE_DATE)
-            .daysLeft(DEFAULT_DAYS_LEFT);
+            .episodeDate(DEFAULT_EPISODE_DATE);
         return nextEpisode;
     }
 
@@ -148,7 +145,6 @@ public class NextEpisodeResourceIntTest {
         assertThat(testNextEpisode.getEpisodeNumber()).isEqualTo(DEFAULT_EPISODE_NUMBER);
         assertThat(testNextEpisode.getEpisodeSeason()).isEqualTo(DEFAULT_EPISODE_SEASON);
         assertThat(testNextEpisode.getEpisodeDate()).isEqualTo(DEFAULT_EPISODE_DATE);
-        assertThat(testNextEpisode.getDaysLeft()).isEqualTo(DEFAULT_DAYS_LEFT);
 
         // Validate the NextEpisode in Elasticsearch
         verify(mockNextEpisodeSearchRepository, times(1)).save(testNextEpisode);
@@ -210,8 +206,7 @@ public class NextEpisodeResourceIntTest {
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
             .andExpect(jsonPath("$.[*].episodeNumber").value(hasItem(DEFAULT_EPISODE_NUMBER)))
             .andExpect(jsonPath("$.[*].episodeSeason").value(hasItem(DEFAULT_EPISODE_SEASON)))
-            .andExpect(jsonPath("$.[*].episodeDate").value(hasItem(DEFAULT_EPISODE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].daysLeft").value(hasItem(DEFAULT_DAYS_LEFT)));
+            .andExpect(jsonPath("$.[*].episodeDate").value(hasItem(DEFAULT_EPISODE_DATE.toString())));
     }
     
     @Test
@@ -230,8 +225,7 @@ public class NextEpisodeResourceIntTest {
             .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.episodeNumber").value(DEFAULT_EPISODE_NUMBER))
             .andExpect(jsonPath("$.episodeSeason").value(DEFAULT_EPISODE_SEASON))
-            .andExpect(jsonPath("$.episodeDate").value(DEFAULT_EPISODE_DATE.toString()))
-            .andExpect(jsonPath("$.daysLeft").value(DEFAULT_DAYS_LEFT));
+            .andExpect(jsonPath("$.episodeDate").value(DEFAULT_EPISODE_DATE.toString()));
     }
 
     @Test
@@ -260,8 +254,7 @@ public class NextEpisodeResourceIntTest {
             .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
             .episodeNumber(UPDATED_EPISODE_NUMBER)
             .episodeSeason(UPDATED_EPISODE_SEASON)
-            .episodeDate(UPDATED_EPISODE_DATE)
-            .daysLeft(UPDATED_DAYS_LEFT);
+            .episodeDate(UPDATED_EPISODE_DATE);
 
         restNextEpisodeMockMvc.perform(put("/api/next-episodes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -278,7 +271,6 @@ public class NextEpisodeResourceIntTest {
         assertThat(testNextEpisode.getEpisodeNumber()).isEqualTo(UPDATED_EPISODE_NUMBER);
         assertThat(testNextEpisode.getEpisodeSeason()).isEqualTo(UPDATED_EPISODE_SEASON);
         assertThat(testNextEpisode.getEpisodeDate()).isEqualTo(UPDATED_EPISODE_DATE);
-        assertThat(testNextEpisode.getDaysLeft()).isEqualTo(UPDATED_DAYS_LEFT);
 
         // Validate the NextEpisode in Elasticsearch
         verify(mockNextEpisodeSearchRepository, times(1)).save(testNextEpisode);
@@ -343,8 +335,7 @@ public class NextEpisodeResourceIntTest {
             .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
             .andExpect(jsonPath("$.[*].episodeNumber").value(hasItem(DEFAULT_EPISODE_NUMBER)))
             .andExpect(jsonPath("$.[*].episodeSeason").value(hasItem(DEFAULT_EPISODE_SEASON)))
-            .andExpect(jsonPath("$.[*].episodeDate").value(hasItem(DEFAULT_EPISODE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].daysLeft").value(hasItem(DEFAULT_DAYS_LEFT)));
+            .andExpect(jsonPath("$.[*].episodeDate").value(hasItem(DEFAULT_EPISODE_DATE.toString())));
     }
 
     @Test

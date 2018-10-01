@@ -96,7 +96,7 @@ public class NextEpisodeResource {
     @Timed
     public List<NextEpisode> getAllNextEpisodes() {
         log.debug("REST request to get all NextEpisodes");
-        return nextEpisodeRepository.findAll();
+        return nextEpisodeRepository.findByUserIsCurrentUser();
     }
 
     /**

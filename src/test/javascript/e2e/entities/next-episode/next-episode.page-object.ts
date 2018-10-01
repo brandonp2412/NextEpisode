@@ -31,7 +31,7 @@ export class NextEpisodeUpdatePage {
     episodeNumberInput = element(by.id('field_episodeNumber'));
     episodeSeasonInput = element(by.id('field_episodeSeason'));
     episodeDateInput = element(by.id('field_episodeDate'));
-    daysLeftInput = element(by.id('field_daysLeft'));
+    userSelect = element(by.id('field_user'));
 
     async getPageTitle() {
         return this.pageTitle.getText();
@@ -77,12 +77,23 @@ export class NextEpisodeUpdatePage {
         return this.episodeDateInput.getAttribute('value');
     }
 
-    async setDaysLeftInput(daysLeft) {
-        await this.daysLeftInput.sendKeys(daysLeft);
+    async userSelectLastOption() {
+        await this.userSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
     }
 
-    async getDaysLeftInput() {
-        return this.daysLeftInput.getAttribute('value');
+    async userSelectOption(option) {
+        await this.userSelect.sendKeys(option);
+    }
+
+    getUserSelect(): ElementFinder {
+        return this.userSelect;
+    }
+
+    async getUserSelectedOption() {
+        return this.userSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {
