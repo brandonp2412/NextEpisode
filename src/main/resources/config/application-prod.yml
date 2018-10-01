@@ -20,6 +20,9 @@ logging:
         io.github.jhipster: INFO
 
 spring:
+    profiles:
+        include:
+            - no-liquibase
     devtools:
         restart:
             enabled: false
